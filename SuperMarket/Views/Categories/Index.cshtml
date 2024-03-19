@@ -1,0 +1,49 @@
+@namespace SuperMarket.Models
+@model List<Category>
+
+@{
+    ViewData["Title"] = "Category Page";
+}
+
+<div class="cotainer">
+    <h3>Catogories</h3>
+    <hr />
+
+    @if (Model != null && Model.Count() > 0)
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td>@category.Name</td>
+                        <td>@category.Description</td>
+                        <td><a class="btn btn-primary" asp-area="" asp-controller="categories" asp-action="edit"
+                                asp-route-id="@category.CategoryId">Edit</a></td>
+                        <td><a class="btn btn-danger" asp-area="" asp-controller="categories" asp-action="delete"
+                                asp-route-categoryId="@category.CategoryId" onclick="return confirmDelete()">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+        <br>
+        <a class="btn btn-success" asp-controller="categories" asp-action="add">Add</a>
+    }
+
+    @section Scripts {
+        <script>
+            function confirmDelete() {
+                return confirm('Are you want to delete the category');
+            }
+        </script>
+    }
+</div>

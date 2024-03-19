@@ -1,0 +1,43 @@
+@model Category
+@{
+    string action = ViewBag.Action ?? string.Empty;
+}
+
+
+<form method="post" asp-controller="categories" asp-action="@action">
+    @if (action?.ToLower() == "edit")
+    {
+        <input type="hidden" asp-for="CategoryId" />
+    }
+    <div class="text-danger" asp-validation-summary="All"></div>
+    @* for name feild *@
+    <div class="row mb-3">
+        <div class="col-2">
+            <label asp-for="Name" class="col-from-label"></label>
+        </div>
+        <div class="col-6">
+            <input type="text" asp-for="Name" class="form-control" />
+        </div>
+    </div>
+
+    @* for description feild *@
+
+    <div class="row mb-3">
+        <div class="col-2">
+            <label asp-for="Description" class="col-from-label"></label>
+        </div>
+        <div class="col-6">
+            <input type="text" asp-for="Description" class="form-control" />
+        </div>
+    </div>
+
+    @* for submit feild *@
+
+    <div class="row mb-3">
+        <div class="col-2">
+            <input type="submit" class="btn btn-success" value="Add" />
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+</form>
